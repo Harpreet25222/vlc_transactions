@@ -1,0 +1,36 @@
+Date                =          Progress Report
+
+28.04.2025      ->          inbound / outbound form is working ( without any validation )
+
+work for evening
+
+change zone field into Quantity in inbound section ((important for inbound reports))
+https://chatgpt.com/share/6810c3b5-eb34-8001-b4e8-0e656634df9a
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+30April ,  2025
+
+
+today task : 1  make  correction in inbound form 
+					2 make  form for lab quality control and submit with fully functionality
+					3  	
+
+
+query to calculate the meter_reading of current vehicle 
+
+SELECT 
+    vm.vehicle_no AS vehicle_number,
+    o.date,
+    i.meter_reading AS inbound_reading,
+    o.meter_reading AS outbound_reading,
+    (i.meter_reading - o.meter_reading) AS total_usage
+FROM outbound o
+JOIN inbound i 
+    ON o.vehicle_id = i.vehicle_id
+    AND o.date = i.date
+JOIN vehicle_master vm 
+    ON o.vehicle_id = vm.id;
+
+
+\\this route for export meter_reading to excel format  
+    <a href="{{ route('inbound.meter.reading.export', request()->query()) }}" class="btn btn-success">
